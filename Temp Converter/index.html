@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Temperature Converter</title>
+  <style>
+    /* Basic CSS styling */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #container {
+      width: 300px;
+      margin: 50px auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h2>Temperature Converter</h2>
+    <input type="number" id="temperatureInput" placeholder="Enter temperature">
+    <select id="unitSelect">
+      <option value="celsius">Celsius</option>
+      <option value="fahrenheit">Fahrenheit</option>
+      <option value="kelvin">Kelvin</option>
+    </select>
+    <button onclick="convertTemperature()">Convert</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function convertTemperature() {
+      var temperature = parseFloat(document.getElementById("temperatureInput").value);
+      var unit = document.getElementById("unitSelect").value;
+      var result = document.getElementById("result");
+
+      if (isNaN(temperature)) {
+        result.textContent = "Please enter a valid number.";
+        return;
+      }
+
+      if (unit === "celsius") {
+        var convertedTempF = (temperature * 9/5) + 32;
+        var convertedTempK = temperature + 273.15;
+        result.textContent = temperature + "°C = " + convertedTempF.toFixed(2) + "°F / " + convertedTempK.toFixed(2) + "K";
+      } else if (unit === "fahrenheit") {
+        var convertedTempC = (temperature - 32) * 5/9;
+        var convertedTempK = (temperature - 32) * 5/9 + 273.15;
+        result.textContent = temperature + "°F = " + convertedTempC.toFixed(2) + "°C / " + convertedTempK.toFixed(2) + "K";
+      } else if (unit === "kelvin") {
+        var convertedTempC = temperature - 273.15;
+        var convertedTempF = (temperature - 273.15) * 9/5 + 32;
+        result.textContent = temperature + "K = " + convertedTempC.toFixed(2) + "°C / " + convertedTempF.toFixed(2) + "°F";
+      }
+    }
+  </script>
+</body>
+</html>
